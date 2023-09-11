@@ -94,6 +94,7 @@
             label2.TabIndex = 3;
             label2.Text = "Start";
             label2.TextAlign = ContentAlignment.MiddleCenter;
+            label2.MouseClick += HronoStartEvent;
             // 
             // label3
             // 
@@ -108,6 +109,7 @@
             label3.TabIndex = 4;
             label3.Text = "Stop";
             label3.TextAlign = ContentAlignment.MiddleCenter;
+            label3.MouseClick += HronoStopEvent;
             // 
             // label4
             // 
@@ -120,6 +122,7 @@
             label4.Size = new Size(96, 35);
             label4.TabIndex = 5;
             label4.Text = "Reset";
+            label4.MouseClick += HronoResetEvent;
             // 
             // label5
             // 

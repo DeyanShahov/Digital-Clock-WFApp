@@ -1,9 +1,14 @@
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+
 namespace Digital_Clock_WFApp
 {
     public partial class Form1 : Form
     {
         private bool hrono = false;
+        private bool hronoToStart = false;
         private bool clock = true;
+        private int elapsedSeconds = 0;
+
         Random random = new Random();
 
         public Form1()
@@ -14,9 +19,15 @@ namespace Digital_Clock_WFApp
         private void TimerTick(object sender, EventArgs e)
         {
             if (clock) label1.Text = DateTime.Now.ToString("HH:mm:ss");
-            else if (hrono) label1.Text = "00:00:00";
-            //SetRandomColor();
-
+            else if (hrono)
+            {
+                if (hronoToStart)
+                {
+                    elapsedSeconds++;
+                    TimeSpan time = TimeSpan.FromSeconds(elapsedSeconds);
+                    label1.Text = time.ToString("hh':'mm':'ss");
+                }
+            }
         }
 
         private void SetRandomColor()
@@ -37,6 +48,9 @@ namespace Digital_Clock_WFApp
 
             hrono = false;
             clock = true;
+
+            elapsedSeconds = 0;
+            hronoToStart = false;
         }
 
         private void ColorClickEvent(object sender, MouseEventArgs e)
@@ -53,6 +67,20 @@ namespace Digital_Clock_WFApp
             clock = false;
             hrono = true;
 
+            label1.Text = "00:00:00";
+
         }
+
+        private void HronoStartEvent(object sender, MouseEventArgs e) => hronoToStart = true;
+
+        private void HronoResetEvent(object sender, MouseEventArgs e) 
+        {
+            elapsedSeconds = 0;
+            hronoToStart = false;
+            label1.Text = "00:00:00";
+        }
+
+        private void HronoStopEvent(object sender, MouseEventArgs e) => hronoToStart = false;
+
     }
 }
