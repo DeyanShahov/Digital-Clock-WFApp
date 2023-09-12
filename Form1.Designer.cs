@@ -37,6 +37,7 @@
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
+            label6 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -136,12 +137,25 @@
             label5.Text = "Hrono";
             label5.MouseClick += HronoClickEvent;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Digital-7", 26.2499962F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.ForeColor = Color.LightSteelBlue;
+            label6.Location = new Point(474, 176);
+            label6.Name = "label6";
+            label6.Size = new Size(87, 35);
+            label6.TabIndex = 7;
+            label6.Text = "Timer";
+            label6.MouseClick += TimerClickEvent;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(595, 291);
+            Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -165,5 +179,6 @@
         private Label label3;
         private Label label4;
         private Label label5;
+        private Label label6;
     }
 }

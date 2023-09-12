@@ -7,7 +7,10 @@ namespace Digital_Clock_WFApp
         private bool hrono = false;
         private bool hronoToStart = false;
         private bool clock = true;
+        private bool timer = false;
+        
         private int elapsedSeconds = 0;
+        private int secondsLeft = 13500;
 
         Random random = new Random();
 
@@ -26,6 +29,20 @@ namespace Digital_Clock_WFApp
                     elapsedSeconds++;
                     TimeSpan time = TimeSpan.FromSeconds(elapsedSeconds);
                     label1.Text = time.ToString("hh':'mm':'ss");
+                }
+            }
+            else if (timer)
+            {
+                if (secondsLeft > 0)
+                {
+                    secondsLeft--;
+                    TimeSpan time = TimeSpan.FromSeconds(secondsLeft);
+                    label1.Text = time.ToString("hh':'mm':'ss");
+                }
+                else
+                {
+                    timer1.Stop();
+                    label1.Text = "End time!";
                 }
             }
         }
@@ -47,6 +64,7 @@ namespace Digital_Clock_WFApp
             label4.Enabled = false;
 
             hrono = false;
+            timer = false;
             clock = true;
 
             elapsedSeconds = 0;
@@ -65,6 +83,7 @@ namespace Digital_Clock_WFApp
             label4.Enabled = true;
 
             clock = false;
+            timer = false;
             hrono = true;
 
             label1.Text = "00:00:00";
@@ -73,14 +92,25 @@ namespace Digital_Clock_WFApp
 
         private void HronoStartEvent(object sender, MouseEventArgs e) => hronoToStart = true;
 
-        private void HronoResetEvent(object sender, MouseEventArgs e) 
+        private void HronoResetEvent(object sender, MouseEventArgs e)
         {
             elapsedSeconds = 0;
             hronoToStart = false;
+
             label1.Text = "00:00:00";
         }
 
         private void HronoStopEvent(object sender, MouseEventArgs e) => hronoToStart = false;
 
+        private void TimerClickEvent(object sender, MouseEventArgs e)
+        {
+            label2.Enabled = false;
+            label3.Enabled = false;
+            label4.Enabled = false;
+
+            hrono = false;
+            clock = false;
+            timer = true;
+        }
     }
 }
