@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            label1 = new Label();
+            TimeLabel = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
             ClockButton = new Label();
             ColorClock = new Label();
@@ -38,19 +38,23 @@
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
+            DateLabel = new Label();
+            DayLabel = new Label();
+            lblRam = new Label();
+            lblCpu = new Label();
             SuspendLayout();
             // 
-            // label1
+            // TimeLabel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Digital-7", 71.99999F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.LawnGreen;
-            label1.Location = new Point(53, 64);
-            label1.Name = "label1";
-            label1.Size = new Size(342, 96);
-            label1.TabIndex = 0;
-            label1.Text = "00:00:00";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
+            TimeLabel.AutoSize = true;
+            TimeLabel.Font = new Font("Digital-7", 71.99999F, FontStyle.Regular, GraphicsUnit.Point);
+            TimeLabel.ForeColor = Color.LawnGreen;
+            TimeLabel.Location = new Point(53, 64);
+            TimeLabel.Name = "TimeLabel";
+            TimeLabel.Size = new Size(342, 96);
+            TimeLabel.TabIndex = 0;
+            TimeLabel.Text = "00:00:00";
+            TimeLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // timer1
             // 
@@ -149,12 +153,60 @@
             label6.Text = "Timer";
             label6.MouseClick += TimerClickEvent;
             // 
+            // DateLabel
+            // 
+            DateLabel.AutoSize = true;
+            DateLabel.Font = new Font("Digital-7", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            DateLabel.ForeColor = Color.Lime;
+            DateLabel.Location = new Point(74, 160);
+            DateLabel.Name = "DateLabel";
+            DateLabel.Size = new Size(155, 28);
+            DateLabel.TabIndex = 8;
+            DateLabel.Text = "June 25 2023";
+            // 
+            // DayLabel
+            // 
+            DayLabel.AutoSize = true;
+            DayLabel.Font = new Font("Digital-7", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            DayLabel.ForeColor = Color.Lime;
+            DayLabel.Location = new Point(285, 160);
+            DayLabel.Name = "DayLabel";
+            DayLabel.Size = new Size(90, 28);
+            DayLabel.TabIndex = 9;
+            DayLabel.Text = "Monday";
+            // 
+            // lblRam
+            // 
+            lblRam.AutoSize = true;
+            lblRam.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblRam.ForeColor = Color.Lime;
+            lblRam.Location = new Point(90, 9);
+            lblRam.Name = "lblRam";
+            lblRam.Size = new Size(39, 20);
+            lblRam.TabIndex = 10;
+            lblRam.Text = "RAM:";
+            // 
+            // lblCpu
+            // 
+            lblCpu.AutoSize = true;
+            lblCpu.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblCpu.ForeColor = Color.Lime;
+            lblCpu.Location = new Point(12, 9);
+            lblCpu.Name = "lblCpu";
+            lblCpu.Size = new Size(43, 20);
+            lblCpu.TabIndex = 11;
+            lblCpu.Text = "CPU: ";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(595, 291);
+            Controls.Add(lblCpu);
+            Controls.Add(lblRam);
+            Controls.Add(DayLabel);
+            Controls.Add(DateLabel);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -162,7 +214,7 @@
             Controls.Add(label2);
             Controls.Add(ColorClock);
             Controls.Add(ClockButton);
-            Controls.Add(label1);
+            Controls.Add(TimeLabel);
             Name = "Form1";
             Text = "Digital Clock";
             ResumeLayout(false);
@@ -171,7 +223,7 @@
 
         #endregion
 
-        private Label label1;
+        private Label TimeLabel;
         private System.Windows.Forms.Timer timer1;
         private Label ClockButton;
         private Label ColorClock;
@@ -180,5 +232,9 @@
         private Label label4;
         private Label label5;
         private Label label6;
+        private Label DateLabel;
+        private Label DayLabel;
+        private Label lblRam;
+        private Label lblCpu;
     }
 }
