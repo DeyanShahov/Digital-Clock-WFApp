@@ -42,6 +42,13 @@
             DayLabel = new Label();
             lblRam = new Label();
             lblCpu = new Label();
+            lblHoursUp = new Label();
+            lblHoursDown = new Label();
+            lblMinutesUp = new Label();
+            lblMinutesDown = new Label();
+            lblSecondsUp = new Label();
+            lblSecondsDown = new Label();
+            lvlExit = new Label();
             SuspendLayout();
             // 
             // TimeLabel
@@ -49,7 +56,7 @@
             TimeLabel.AutoSize = true;
             TimeLabel.Font = new Font("Digital-7", 71.99999F, FontStyle.Regular, GraphicsUnit.Point);
             TimeLabel.ForeColor = Color.LawnGreen;
-            TimeLabel.Location = new Point(53, 64);
+            TimeLabel.Location = new Point(67, 75);
             TimeLabel.Name = "TimeLabel";
             TimeLabel.Size = new Size(342, 96);
             TimeLabel.TabIndex = 0;
@@ -65,11 +72,11 @@
             // ClockButton
             // 
             ClockButton.AutoSize = true;
-            ClockButton.Font = new Font("Digital-7", 26.2499962F, FontStyle.Regular, GraphicsUnit.Point);
+            ClockButton.Font = new Font("Digital-7", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             ClockButton.ForeColor = Color.LightSteelBlue;
-            ClockButton.Location = new Point(474, 64);
+            ClockButton.Location = new Point(437, 102);
             ClockButton.Name = "ClockButton";
-            ClockButton.Size = new Size(96, 35);
+            ClockButton.Size = new Size(75, 28);
             ClockButton.TabIndex = 1;
             ClockButton.Tag = "";
             ClockButton.Text = "clock";
@@ -78,11 +85,11 @@
             // ColorClock
             // 
             ColorClock.AutoSize = true;
-            ColorClock.Font = new Font("Digital-7", 26.2499962F, FontStyle.Regular, GraphicsUnit.Point);
+            ColorClock.Font = new Font("Digital-7", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             ColorClock.ForeColor = Color.LightSteelBlue;
-            ColorClock.Location = new Point(474, 9);
+            ColorClock.Location = new Point(437, 59);
             ColorClock.Name = "ColorClock";
-            ColorClock.Size = new Size(98, 35);
+            ColorClock.Size = new Size(76, 28);
             ColorClock.TabIndex = 2;
             ColorClock.Text = "Color";
             ColorClock.MouseClick += ColorClickEvent;
@@ -93,13 +100,13 @@
             label2.Enabled = false;
             label2.Font = new Font("Digital-7", 26.2499962F, FontStyle.Regular, GraphicsUnit.Point);
             label2.ForeColor = Color.LightSteelBlue;
-            label2.Location = new Point(12, 233);
+            label2.Location = new Point(12, 195);
             label2.Name = "label2";
             label2.Size = new Size(100, 35);
             label2.TabIndex = 3;
             label2.Text = "Start";
             label2.TextAlign = ContentAlignment.MiddleCenter;
-            label2.MouseClick += HronoStartEvent;
+            label2.MouseClick += StartEvent;
             // 
             // label3
             // 
@@ -108,13 +115,13 @@
             label3.Enabled = false;
             label3.Font = new Font("Digital-7", 26.2499962F, FontStyle.Regular, GraphicsUnit.Point);
             label3.ForeColor = Color.LightSteelBlue;
-            label3.Location = new Point(146, 233);
+            label3.Location = new Point(145, 195);
             label3.Name = "label3";
             label3.Size = new Size(83, 35);
             label3.TabIndex = 4;
             label3.Text = "Stop";
             label3.TextAlign = ContentAlignment.MiddleCenter;
-            label3.MouseClick += HronoStopEvent;
+            label3.MouseClick += StopEvent;
             // 
             // label4
             // 
@@ -122,21 +129,21 @@
             label4.Enabled = false;
             label4.Font = new Font("Digital-7", 26.2499962F, FontStyle.Regular, GraphicsUnit.Point);
             label4.ForeColor = Color.LightSteelBlue;
-            label4.Location = new Point(269, 233);
+            label4.Location = new Point(269, 195);
             label4.Name = "label4";
             label4.Size = new Size(96, 35);
             label4.TabIndex = 5;
             label4.Text = "Reset";
-            label4.MouseClick += HronoResetEvent;
+            label4.MouseClick += ResetEvent;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Digital-7", 26.2499962F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Font = new Font("Digital-7", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             label5.ForeColor = Color.LightSteelBlue;
-            label5.Location = new Point(474, 125);
+            label5.Location = new Point(437, 143);
             label5.Name = "label5";
-            label5.Size = new Size(100, 35);
+            label5.Size = new Size(77, 28);
             label5.TabIndex = 6;
             label5.Text = "Hrono";
             label5.MouseClick += HronoClickEvent;
@@ -144,36 +151,36 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Digital-7", 26.2499962F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Font = new Font("Digital-7", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             label6.ForeColor = Color.LightSteelBlue;
-            label6.Location = new Point(474, 176);
+            label6.Location = new Point(437, 183);
             label6.Name = "label6";
-            label6.Size = new Size(87, 35);
+            label6.Size = new Size(67, 28);
             label6.TabIndex = 7;
             label6.Text = "Timer";
             label6.MouseClick += TimerClickEvent;
             // 
             // DateLabel
             // 
-            DateLabel.AutoSize = true;
-            DateLabel.Font = new Font("Digital-7", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            DateLabel.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
             DateLabel.ForeColor = Color.Lime;
-            DateLabel.Location = new Point(74, 160);
+            DateLabel.Location = new Point(90, 47);
             DateLabel.Name = "DateLabel";
-            DateLabel.Size = new Size(155, 28);
+            DateLabel.Size = new Size(138, 28);
             DateLabel.TabIndex = 8;
             DateLabel.Text = "June 25 2023";
+            DateLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // DayLabel
             // 
-            DayLabel.AutoSize = true;
-            DayLabel.Font = new Font("Digital-7", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            DayLabel.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
             DayLabel.ForeColor = Color.Lime;
-            DayLabel.Location = new Point(285, 160);
+            DayLabel.Location = new Point(256, 47);
             DayLabel.Name = "DayLabel";
-            DayLabel.Size = new Size(90, 28);
+            DayLabel.Size = new Size(140, 28);
             DayLabel.TabIndex = 9;
             DayLabel.Text = "Monday";
+            DayLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblRam
             // 
@@ -197,12 +204,110 @@
             lblCpu.TabIndex = 11;
             lblCpu.Text = "CPU: ";
             // 
+            // lblHoursUp
+            // 
+            lblHoursUp.AutoSize = true;
+            lblHoursUp.Font = new Font("Digital-7", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblHoursUp.ForeColor = Color.Lime;
+            lblHoursUp.Location = new Point(90, 167);
+            lblHoursUp.Name = "lblHoursUp";
+            lblHoursUp.Size = new Size(26, 29);
+            lblHoursUp.TabIndex = 12;
+            lblHoursUp.Text = "+";
+            lblHoursUp.Visible = false;
+            lblHoursUp.Click += lblHoursUp_Click;
+            // 
+            // lblHoursDown
+            // 
+            lblHoursDown.AutoSize = true;
+            lblHoursDown.Font = new Font("Digital-7", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblHoursDown.ForeColor = Color.Lime;
+            lblHoursDown.Location = new Point(136, 167);
+            lblHoursDown.Name = "lblHoursDown";
+            lblHoursDown.Size = new Size(26, 29);
+            lblHoursDown.TabIndex = 13;
+            lblHoursDown.Text = "-";
+            lblHoursDown.Visible = false;
+            lblHoursDown.Click += lblHoursDown_Click;
+            // 
+            // lblMinutesUp
+            // 
+            lblMinutesUp.AutoSize = true;
+            lblMinutesUp.Font = new Font("Digital-7", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMinutesUp.ForeColor = Color.Lime;
+            lblMinutesUp.Location = new Point(204, 167);
+            lblMinutesUp.Name = "lblMinutesUp";
+            lblMinutesUp.Size = new Size(26, 29);
+            lblMinutesUp.TabIndex = 14;
+            lblMinutesUp.Text = "+";
+            lblMinutesUp.Visible = false;
+            lblMinutesUp.Click += lblMinutesUp_Click;
+            // 
+            // lblMinutesDown
+            // 
+            lblMinutesDown.AutoSize = true;
+            lblMinutesDown.Font = new Font("Digital-7", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMinutesDown.ForeColor = Color.Lime;
+            lblMinutesDown.Location = new Point(243, 167);
+            lblMinutesDown.Name = "lblMinutesDown";
+            lblMinutesDown.Size = new Size(26, 29);
+            lblMinutesDown.TabIndex = 15;
+            lblMinutesDown.Text = "-";
+            lblMinutesDown.Visible = false;
+            lblMinutesDown.Click += lblMinutesDown_Click;
+            // 
+            // lblSecondsUp
+            // 
+            lblSecondsUp.AutoSize = true;
+            lblSecondsUp.Font = new Font("Digital-7", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSecondsUp.ForeColor = Color.Lime;
+            lblSecondsUp.Location = new Point(306, 167);
+            lblSecondsUp.Name = "lblSecondsUp";
+            lblSecondsUp.Size = new Size(26, 29);
+            lblSecondsUp.TabIndex = 16;
+            lblSecondsUp.Text = "+";
+            lblSecondsUp.Visible = false;
+            lblSecondsUp.Click += lblSecondsUp_Click;
+            // 
+            // lblSecondsDown
+            // 
+            lblSecondsDown.AutoSize = true;
+            lblSecondsDown.Font = new Font("Digital-7", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSecondsDown.ForeColor = Color.Lime;
+            lblSecondsDown.Location = new Point(351, 167);
+            lblSecondsDown.Name = "lblSecondsDown";
+            lblSecondsDown.Size = new Size(26, 29);
+            lblSecondsDown.TabIndex = 17;
+            lblSecondsDown.Text = "-";
+            lblSecondsDown.Visible = false;
+            lblSecondsDown.Click += lblSecondsDown_Click;
+            // 
+            // lvlExit
+            // 
+            lvlExit.AutoSize = true;
+            lvlExit.Font = new Font("Digital-7", 14.2499981F, FontStyle.Bold, GraphicsUnit.Point);
+            lvlExit.ForeColor = Color.Maroon;
+            lvlExit.Location = new Point(470, 9);
+            lvlExit.Name = "lvlExit";
+            lvlExit.Size = new Size(42, 20);
+            lvlExit.TabIndex = 18;
+            lvlExit.Text = "EXIT";
+            lvlExit.Click += lvlExit_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(595, 291);
+            ClientSize = new Size(524, 241);
+            ControlBox = false;
+            Controls.Add(lvlExit);
+            Controls.Add(lblSecondsDown);
+            Controls.Add(lblSecondsUp);
+            Controls.Add(lblMinutesDown);
+            Controls.Add(lblMinutesUp);
+            Controls.Add(lblHoursDown);
+            Controls.Add(lblHoursUp);
             Controls.Add(lblCpu);
             Controls.Add(lblRam);
             Controls.Add(DayLabel);
@@ -215,8 +320,12 @@
             Controls.Add(ColorClock);
             Controls.Add(ClockButton);
             Controls.Add(TimeLabel);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Name = "Form1";
-            Text = "Digital Clock";
+            StartPosition = FormStartPosition.Manual;
+            MouseDown += FormMouseDownEvent;
+            MouseMove += FormMouseMoveEvent;
+            MouseUp += FormMouseUpEvent;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -236,5 +345,12 @@
         private Label DayLabel;
         private Label lblRam;
         private Label lblCpu;
+        private Label lblHoursUp;
+        private Label lblHoursDown;
+        private Label lblMinutesUp;
+        private Label lblMinutesDown;
+        private Label lblSecondsUp;
+        private Label lblSecondsDown;
+        private Label lvlExit;
     }
 }
