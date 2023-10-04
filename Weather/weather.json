@@ -1,0 +1,41 @@
+{
+  "coord": {
+    "lon": 27.4678,
+    "lat": 42.5061
+  },
+  "weather": [
+    {
+      "description": "few clouds",
+      "icon": "02n",
+      "id": 801,
+      "main": "Clouds"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 15.06,
+    "feels_like": 14.27,
+    "temp_min": 15.06,
+    "temp_max": 15.06,
+    "pressure": 1025,
+    "humidity": 63
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 2.57,
+    "deg": 100
+  },
+  "clouds": { "all": 12 },
+  "dt": 1696356455,
+  "sys": {
+    "type": 1,
+    "id": 6360,
+    "country": "BG",
+    "sunrise": 1696306122,
+    "sunset": 1696348185
+  },
+  "timezone": 10800,
+  "id": 732770,
+  "name": "Burgas",
+  "cod": 200
+}

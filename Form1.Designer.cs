@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             TimeLabel = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
             ClockButton = new Label();
@@ -49,6 +50,12 @@
             lblSecondsUp = new Label();
             lblSecondsDown = new Label();
             lvlExit = new Label();
+            lblWeather = new Label();
+            panWeather = new Panel();
+            lblWeatherResult = new Label();
+            timerWeather = new System.Windows.Forms.Timer(components);
+            lblWeatherTemp = new Label();
+            panWeather.SuspendLayout();
             SuspendLayout();
             // 
             // TimeLabel
@@ -74,7 +81,7 @@
             ClockButton.AutoSize = true;
             ClockButton.Font = new Font("Digital-7", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             ClockButton.ForeColor = Color.LightSteelBlue;
-            ClockButton.Location = new Point(437, 102);
+            ClockButton.Location = new Point(436, 118);
             ClockButton.Name = "ClockButton";
             ClockButton.Size = new Size(75, 28);
             ClockButton.TabIndex = 1;
@@ -87,7 +94,7 @@
             ColorClock.AutoSize = true;
             ColorClock.Font = new Font("Digital-7", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             ColorClock.ForeColor = Color.LightSteelBlue;
-            ColorClock.Location = new Point(437, 59);
+            ColorClock.Location = new Point(436, 75);
             ColorClock.Name = "ColorClock";
             ColorClock.Size = new Size(76, 28);
             ColorClock.TabIndex = 2;
@@ -141,7 +148,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Digital-7", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             label5.ForeColor = Color.LightSteelBlue;
-            label5.Location = new Point(437, 143);
+            label5.Location = new Point(436, 159);
             label5.Name = "label5";
             label5.Size = new Size(77, 28);
             label5.TabIndex = 6;
@@ -153,7 +160,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Digital-7", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             label6.ForeColor = Color.LightSteelBlue;
-            label6.Location = new Point(437, 183);
+            label6.Location = new Point(436, 199);
             label6.Name = "label6";
             label6.Size = new Size(67, 28);
             label6.TabIndex = 7;
@@ -294,6 +301,56 @@
             lvlExit.Text = "EXIT";
             lvlExit.Click += lvlExit_Click;
             // 
+            // lblWeather
+            // 
+            lblWeather.AutoSize = true;
+            lblWeather.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWeather.ForeColor = Color.LightSteelBlue;
+            lblWeather.Location = new Point(384, 9);
+            lblWeather.Name = "lblWeather";
+            lblWeather.Size = new Size(70, 20);
+            lblWeather.TabIndex = 19;
+            lblWeather.Text = "WEATHER";
+            lblWeather.Click += lblWeather_Click;
+            // 
+            // panWeather
+            // 
+            panWeather.BackColor = SystemColors.ControlDark;
+            panWeather.BorderStyle = BorderStyle.FixedSingle;
+            panWeather.Controls.Add(lblWeatherResult);
+            panWeather.Location = new Point(14, 9);
+            panWeather.Name = "panWeather";
+            panWeather.Size = new Size(363, 212);
+            panWeather.TabIndex = 21;
+            panWeather.Visible = false;
+            // 
+            // lblWeatherResult
+            // 
+            lblWeatherResult.AutoSize = true;
+            lblWeatherResult.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWeatherResult.Location = new Point(18, 19);
+            lblWeatherResult.Name = "lblWeatherResult";
+            lblWeatherResult.Size = new Size(50, 20);
+            lblWeatherResult.TabIndex = 0;
+            lblWeatherResult.Text = "label1";
+            // 
+            // timerWeather
+            // 
+            timerWeather.Enabled = true;
+            timerWeather.Interval = 300000;
+            timerWeather.Tick += timerWeather_Tick;
+            // 
+            // lblWeatherTemp
+            // 
+            lblWeatherTemp.AutoSize = true;
+            lblWeatherTemp.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWeatherTemp.ForeColor = Color.Lime;
+            lblWeatherTemp.Location = new Point(309, 9);
+            lblWeatherTemp.Name = "lblWeatherTemp";
+            lblWeatherTemp.Size = new Size(23, 20);
+            lblWeatherTemp.TabIndex = 20;
+            lblWeatherTemp.Text = "°C";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -301,6 +358,8 @@
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(524, 241);
             ControlBox = false;
+            Controls.Add(panWeather);
+            Controls.Add(lblWeather);
             Controls.Add(lvlExit);
             Controls.Add(lblSecondsDown);
             Controls.Add(lblSecondsUp);
@@ -320,12 +379,16 @@
             Controls.Add(ColorClock);
             Controls.Add(ClockButton);
             Controls.Add(TimeLabel);
+            Controls.Add(lblWeatherTemp);
             FormBorderStyle = FormBorderStyle.FixedDialog;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             StartPosition = FormStartPosition.Manual;
             MouseDown += FormMouseDownEvent;
             MouseMove += FormMouseMoveEvent;
             MouseUp += FormMouseUpEvent;
+            panWeather.ResumeLayout(false);
+            panWeather.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -352,5 +415,10 @@
         private Label lblSecondsUp;
         private Label lblSecondsDown;
         private Label lvlExit;
+        private Label lblWeather;
+        private Panel panWeather;
+        private Label lblWeatherResult;
+        private System.Windows.Forms.Timer timerWeather;
+        private Label lblWeatherTemp;
     }
 }

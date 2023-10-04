@@ -1,5 +1,9 @@
+using Digital_Clock_WFApp.Weather;
+using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Globalization;
+using System.Net;
+using System.Net.Http.Json;
 
 namespace Digital_Clock_WFApp
 {
@@ -21,12 +25,17 @@ namespace Digital_Clock_WFApp
         private bool isDragging = false;
         private Point startPoint;
 
+        private readonly string folderPath = Path.Combine(Application.StartupPath)
+          .Replace("bin\\Debug\\net6.0-windows\\", "Weather\\");
+
         public Form1()
         {
             InitializeComponent();
 
             ramCounter = new PerformanceCounter("Memory", "% Committed Bytes In Use", true);
             cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total", true);
+
+            SetTempOnScreen();
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -248,5 +257,42 @@ namespace Digital_Clock_WFApp
         }
 
         private void lvlExit_Click(object sender, EventArgs e) => Application.Exit();
+
+        private void lblWeather_Click(object sender, EventArgs e)
+        {
+            if (panWeather.Visible == false)
+            {
+                panWeather.Visible = true;
+                GetWeatherInfo();
+            }
+            else panWeather.Visible = false;
+        }
+
+        private Root GetWeatherInfo()
+        {
+            string appiKey = "8e8172944760f0c68c1f84d53f3d3f40";
+            string url = string.Format("https://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&appid={1}", "Burgas", appiKey);
+
+            using (WebClient client = new WebClient())
+            {
+                var json = client.DownloadString(url);
+                Root weatherInfo = JsonConvert.DeserializeObject<Root>(json);
+                lblWeatherResult.Text = weatherInfo.name + "," + weatherInfo.sys.country + ", " + weatherInfo.main.temp + "°C, " + weatherInfo.wind.speed;
+
+                return weatherInfo;
+            }
+        }
+
+        private void timerWeather_Tick(object sender, EventArgs e)
+        {
+            SetTempOnScreen();
+        }
+
+        private void SetTempOnScreen()
+        {
+            var weather = GetWeatherInfo();
+
+            lblWeatherTemp.Text = Math.Round(weather.main.temp) + "°C";
+        }
     }
 }
