@@ -52,7 +52,17 @@
             lvlExit = new Label();
             lblWeather = new Label();
             panWeather = new Panel();
-            lblWeatherResult = new Label();
+            lblWeatherMinMax = new Label();
+            lblWeatherHumidity = new Label();
+            lblWeatherFeelsLike = new Label();
+            lblWeatherFullTemp = new Label();
+            btnWeatherLoad = new Button();
+            textBoxWeatherCity = new TextBox();
+            lblWeatherCity = new Label();
+            lblWeatherPressure = new Label();
+            lblWeatherWindSpeed = new Label();
+            lblWeatherDescription = new Label();
+            lblWeatherMain = new Label();
             timerWeather = new System.Windows.Forms.Timer(components);
             lblWeatherTemp = new Label();
             panWeather.SuspendLayout();
@@ -315,24 +325,141 @@
             // 
             // panWeather
             // 
-            panWeather.BackColor = SystemColors.ControlDark;
+            panWeather.BackColor = SystemColors.ControlText;
             panWeather.BorderStyle = BorderStyle.FixedSingle;
-            panWeather.Controls.Add(lblWeatherResult);
-            panWeather.Location = new Point(14, 9);
+            panWeather.Controls.Add(lblWeatherMinMax);
+            panWeather.Controls.Add(lblWeatherHumidity);
+            panWeather.Controls.Add(lblWeatherFeelsLike);
+            panWeather.Controls.Add(lblWeatherFullTemp);
+            panWeather.Controls.Add(btnWeatherLoad);
+            panWeather.Controls.Add(textBoxWeatherCity);
+            panWeather.Controls.Add(lblWeatherCity);
+            panWeather.Controls.Add(lblWeatherPressure);
+            panWeather.Controls.Add(lblWeatherWindSpeed);
+            panWeather.Controls.Add(lblWeatherDescription);
+            panWeather.Controls.Add(lblWeatherMain);
+            panWeather.Location = new Point(15, 9);
             panWeather.Name = "panWeather";
-            panWeather.Size = new Size(363, 212);
+            panWeather.Size = new Size(372, 206);
             panWeather.TabIndex = 21;
             panWeather.Visible = false;
             // 
-            // lblWeatherResult
+            // lblWeatherMinMax
             // 
-            lblWeatherResult.AutoSize = true;
-            lblWeatherResult.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblWeatherResult.Location = new Point(18, 19);
-            lblWeatherResult.Name = "lblWeatherResult";
-            lblWeatherResult.Size = new Size(50, 20);
-            lblWeatherResult.TabIndex = 0;
-            lblWeatherResult.Text = "label1";
+            lblWeatherMinMax.AutoSize = true;
+            lblWeatherMinMax.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWeatherMinMax.ForeColor = SystemColors.Info;
+            lblWeatherMinMax.Location = new Point(201, 128);
+            lblWeatherMinMax.Name = "lblWeatherMinMax";
+            lblWeatherMinMax.Size = new Size(95, 20);
+            lblWeatherMinMax.TabIndex = 10;
+            lblWeatherMinMax.Text = "Min / Max °C";
+            // 
+            // lblWeatherHumidity
+            // 
+            lblWeatherHumidity.AutoSize = true;
+            lblWeatherHumidity.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWeatherHumidity.ForeColor = SystemColors.Info;
+            lblWeatherHumidity.Location = new Point(21, 128);
+            lblWeatherHumidity.Name = "lblWeatherHumidity";
+            lblWeatherHumidity.Size = new Size(97, 20);
+            lblWeatherHumidity.TabIndex = 9;
+            lblWeatherHumidity.Text = "Humidity:   %";
+            // 
+            // lblWeatherFeelsLike
+            // 
+            lblWeatherFeelsLike.AutoSize = true;
+            lblWeatherFeelsLike.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWeatherFeelsLike.ForeColor = SystemColors.Info;
+            lblWeatherFeelsLike.Location = new Point(201, 99);
+            lblWeatherFeelsLike.Name = "lblWeatherFeelsLike";
+            lblWeatherFeelsLike.Size = new Size(117, 20);
+            lblWeatherFeelsLike.TabIndex = 8;
+            lblWeatherFeelsLike.Text = "Feels like:   °C";
+            // 
+            // lblWeatherFullTemp
+            // 
+            lblWeatherFullTemp.AutoSize = true;
+            lblWeatherFullTemp.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWeatherFullTemp.ForeColor = SystemColors.Info;
+            lblWeatherFullTemp.Location = new Point(21, 99);
+            lblWeatherFullTemp.Name = "lblWeatherFullTemp";
+            lblWeatherFullTemp.Size = new Size(81, 20);
+            lblWeatherFullTemp.TabIndex = 7;
+            lblWeatherFullTemp.Text = "Temp:    °C";
+            // 
+            // btnWeatherLoad
+            // 
+            btnWeatherLoad.Font = new Font("Digital-7", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnWeatherLoad.Location = new Point(240, 16);
+            btnWeatherLoad.Name = "btnWeatherLoad";
+            btnWeatherLoad.Size = new Size(75, 23);
+            btnWeatherLoad.TabIndex = 6;
+            btnWeatherLoad.Text = "Load";
+            btnWeatherLoad.UseVisualStyleBackColor = true;
+            btnWeatherLoad.Click += btnWeatherLoad_Click;
+            // 
+            // textBoxWeatherCity
+            // 
+            textBoxWeatherCity.Location = new Point(70, 16);
+            textBoxWeatherCity.Name = "textBoxWeatherCity";
+            textBoxWeatherCity.Size = new Size(145, 23);
+            textBoxWeatherCity.TabIndex = 5;
+            // 
+            // lblWeatherCity
+            // 
+            lblWeatherCity.AutoSize = true;
+            lblWeatherCity.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWeatherCity.ForeColor = SystemColors.Info;
+            lblWeatherCity.Location = new Point(20, 19);
+            lblWeatherCity.Name = "lblWeatherCity";
+            lblWeatherCity.Size = new Size(38, 20);
+            lblWeatherCity.TabIndex = 4;
+            lblWeatherCity.Text = "City";
+            // 
+            // lblWeatherPressure
+            // 
+            lblWeatherPressure.AutoSize = true;
+            lblWeatherPressure.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWeatherPressure.ForeColor = SystemColors.Info;
+            lblWeatherPressure.Location = new Point(201, 156);
+            lblWeatherPressure.Name = "lblWeatherPressure";
+            lblWeatherPressure.Size = new Size(82, 20);
+            lblWeatherPressure.TabIndex = 3;
+            lblWeatherPressure.Text = "Pressure:";
+            // 
+            // lblWeatherWindSpeed
+            // 
+            lblWeatherWindSpeed.AutoSize = true;
+            lblWeatherWindSpeed.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWeatherWindSpeed.ForeColor = SystemColors.Info;
+            lblWeatherWindSpeed.Location = new Point(21, 156);
+            lblWeatherWindSpeed.Name = "lblWeatherWindSpeed";
+            lblWeatherWindSpeed.Size = new Size(90, 20);
+            lblWeatherWindSpeed.TabIndex = 2;
+            lblWeatherWindSpeed.Text = "Wind Speed:";
+            // 
+            // lblWeatherDescription
+            // 
+            lblWeatherDescription.AutoSize = true;
+            lblWeatherDescription.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWeatherDescription.ForeColor = SystemColors.Info;
+            lblWeatherDescription.Location = new Point(201, 65);
+            lblWeatherDescription.Name = "lblWeatherDescription";
+            lblWeatherDescription.Size = new Size(97, 20);
+            lblWeatherDescription.TabIndex = 1;
+            lblWeatherDescription.Text = "Description:";
+            // 
+            // lblWeatherMain
+            // 
+            lblWeatherMain.AutoSize = true;
+            lblWeatherMain.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWeatherMain.ForeColor = SystemColors.Info;
+            lblWeatherMain.Location = new Point(21, 65);
+            lblWeatherMain.Name = "lblWeatherMain";
+            lblWeatherMain.Size = new Size(42, 20);
+            lblWeatherMain.TabIndex = 0;
+            lblWeatherMain.Text = "Main:";
             // 
             // timerWeather
             // 
@@ -417,8 +544,18 @@
         private Label lvlExit;
         private Label lblWeather;
         private Panel panWeather;
-        private Label lblWeatherResult;
+        private Label lblWeatherMain;
         private System.Windows.Forms.Timer timerWeather;
         private Label lblWeatherTemp;
+        private Label lblWeatherPressure;
+        private Label lblWeatherWindSpeed;
+        private Label lblWeatherDescription;
+        private Label lblWeatherCity;
+        private TextBox textBoxWeatherCity;
+        private Button btnWeatherLoad;
+        private Label lblWeatherFullTemp;
+        private Label lblWeatherFeelsLike;
+        private Label lblWeatherHumidity;
+        private Label lblWeatherMinMax;
     }
 }

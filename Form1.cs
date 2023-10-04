@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Globalization;
 using System.Net;
-using System.Net.Http.Json;
 
 namespace Digital_Clock_WFApp
 {
@@ -268,16 +267,15 @@ namespace Digital_Clock_WFApp
             else panWeather.Visible = false;
         }
 
-        private Root GetWeatherInfo()
+        private Root GetWeatherInfo(string city = "Burgas")
         {
             string appiKey = "8e8172944760f0c68c1f84d53f3d3f40";
-            string url = string.Format("https://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&appid={1}", "Burgas", appiKey);
+            string url = string.Format("https://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&appid={1}", city, appiKey);
 
             using (WebClient client = new WebClient())
             {
                 var json = client.DownloadString(url);
                 Root weatherInfo = JsonConvert.DeserializeObject<Root>(json);
-                lblWeatherResult.Text = weatherInfo.name + "," + weatherInfo.sys.country + ", " + weatherInfo.main.temp + "°C, " + weatherInfo.wind.speed;
 
                 return weatherInfo;
             }
@@ -290,9 +288,26 @@ namespace Digital_Clock_WFApp
 
         private void SetTempOnScreen()
         {
-            var weather = GetWeatherInfo();
+            var weatherInfo = GetWeatherInfo();
 
-            lblWeatherTemp.Text = Math.Round(weather.main.temp) + "°C";
+            lblWeatherTemp.Text = Math.Round(weatherInfo.main.temp) + "°C";
+        }
+
+        private void btnWeatherLoad_Click(object sender, EventArgs e)
+        {
+            Root weatherInfo;
+
+            if (!string.IsNullOrEmpty(textBoxWeatherCity.Text)) weatherInfo = GetWeatherInfo(textBoxWeatherCity.Text);
+            else weatherInfo = GetWeatherInfo();
+
+            lblWeatherMain.Text = weatherInfo.weather.FirstOrDefault()?.main;
+            lblWeatherDescription.Text = weatherInfo.weather.FirstOrDefault()?.description;
+            lblWeatherFullTemp.Text = "Temp: " + Math.Round(weatherInfo.main.temp) + " °C";
+            lblWeatherFeelsLike.Text = "Feels like: " + Math.Round(weatherInfo.main.feels_like) + " °C";
+            lblWeatherHumidity.Text = "Humidity: " + weatherInfo.main.humidity + "%";
+            lblWeatherMinMax.Text = Math.Round(weatherInfo.main.temp_min) + " / " + Math.Round(weatherInfo.main.temp_max) + " °C";
+            lblWeatherWindSpeed.Text = "Wind Speed: " + weatherInfo.wind.speed;
+            lblWeatherPressure.Text = "Pressure: " + weatherInfo.main.pressure;
         }
     }
 }
