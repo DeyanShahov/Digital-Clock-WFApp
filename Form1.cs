@@ -1,4 +1,6 @@
 using Digital_Clock_WFApp.Weather;
+using Microsoft.AspNet.SignalR.Client;
+using Microsoft.Owin.Hosting;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Globalization;
@@ -24,8 +26,9 @@ namespace Digital_Clock_WFApp
         private bool isDragging = false;
         private Point startPoint;
 
-        private readonly string folderPath = Path.Combine(Application.StartupPath)
-          .Replace("bin\\Debug\\net6.0-windows\\", "Weather\\");
+        private HubConnection hubConnection;
+        private IHubProxy chatHubProxy;
+
 
         public Form1()
         {
@@ -37,6 +40,15 @@ namespace Digital_Clock_WFApp
             timerWeather.Start();
 
             SetTempOnScreen();
+
+            hubConnection = new HubConnection("http://localhost:8080");
+            chatHubProxy = hubConnection.CreateHubProxy("ChatHub");
+            hubConnection.Start().Wait();
+
+            chatHubProxy.On<List<string>>("Send", messages =>
+            {
+                UpdateChat(messages);
+            });
         }
 
         private void TimerTick(object sender, EventArgs e)
@@ -259,6 +271,8 @@ namespace Digital_Clock_WFApp
 
         private void lvlExit_Click(object sender, EventArgs e) => Application.Exit();
 
+
+        #region Weather
         private async void lblWeather_Click(object sender, EventArgs e)
         {
             if (panWeather.Visible == false)
@@ -316,15 +330,38 @@ namespace Digital_Clock_WFApp
                 lblWeatherDescription.Text = weatherInfo.weather.FirstOrDefault()?.description;
                 lblWeatherFullTemp.Text = "Temp: " + Math.Round(weatherInfo.main.temp) + " °C";
                 lblWeatherFeelsLike.Text = "Feels like: " + Math.Round(weatherInfo.main.feels_like) + " °C";
-                lblWeatherHumidity.Text = "Humidity: " + weatherInfo.main.humidity + "%";
+                lblWeatherHumidity.Text = "Humidity: " + weatherInfo.main.humidity + " %";
                 lblWeatherMinMax.Text = Math.Round(weatherInfo.main.temp_min) + " / " + Math.Round(weatherInfo.main.temp_max) + " °C";
-                lblWeatherWindSpeed.Text = "Wind Speed: " + weatherInfo.wind.speed;
-                lblWeatherPressure.Text = "Pressure: " + weatherInfo.main.pressure;
+                lblWeatherWindSpeed.Text = "Wind Speed: " + weatherInfo.wind.speed + " m/s";
+                lblWeatherPressure.Text = "Pressure: " + weatherInfo.main.pressure + " hPa";
             }
             else
             {
                 textBoxWeatherCity.Text = "Error on loading";
             }
         }
+
+        #endregion
+
+        private void StartUpChat()
+        {
+            string url = "http://localhost:8080";
+
+            using (WebApp.Start(url))
+            {
+                textBoxChatContent.Text = $"Server running on {url}";
+            }
+        }
+
+        private void UpdateChat(List<string> messages) => textBoxChatContent.Text = messages.Last();
+
+        private void SendMessage(string message, string username) => chatHubProxy.Invoke("Send", message, username);
+
+        private void RegisterUser(string username) => chatHubProxy.Invoke("RegisterUser", username);
+
+        private void ChangeUsername(string oldUsername, string newUsername) => chatHubProxy.Invoke("ChangeUsername", oldUsername, newUsername);
+
+        private void UnregisterUser(string username) => chatHubProxy.Invoke("UnregisterUser", username);
+
     }
 }

@@ -65,7 +65,16 @@
             lblWeatherMain = new Label();
             timerWeather = new System.Windows.Forms.Timer(components);
             lblWeatherTemp = new Label();
+            panChat = new Panel();
+            btnJoinChat = new Button();
+            btnSetName = new Button();
+            textBoxSetName = new TextBox();
+            textBoxChatContent = new TextBox();
+            textBoxChatInput = new TextBox();
+            lblChat = new Label();
+            btnLeaveChat = new Button();
             panWeather.SuspendLayout();
+            panChat.SuspendLayout();
             SuspendLayout();
             // 
             // TimeLabel
@@ -316,7 +325,7 @@
             lblWeather.AutoSize = true;
             lblWeather.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
             lblWeather.ForeColor = Color.LightSteelBlue;
-            lblWeather.Location = new Point(384, 9);
+            lblWeather.Location = new Point(394, 9);
             lblWeather.Name = "lblWeather";
             lblWeather.Size = new Size(70, 20);
             lblWeather.TabIndex = 19;
@@ -338,7 +347,7 @@
             panWeather.Controls.Add(lblWeatherWindSpeed);
             panWeather.Controls.Add(lblWeatherDescription);
             panWeather.Controls.Add(lblWeatherMain);
-            panWeather.Location = new Point(15, 9);
+            panWeather.Location = new Point(12, 32);
             panWeather.Name = "panWeather";
             panWeather.Size = new Size(372, 206);
             panWeather.TabIndex = 21;
@@ -473,11 +482,86 @@
             lblWeatherTemp.AutoSize = true;
             lblWeatherTemp.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
             lblWeatherTemp.ForeColor = Color.Lime;
-            lblWeatherTemp.Location = new Point(309, 9);
+            lblWeatherTemp.Location = new Point(256, 9);
             lblWeatherTemp.Name = "lblWeatherTemp";
             lblWeatherTemp.Size = new Size(23, 20);
             lblWeatherTemp.TabIndex = 20;
             lblWeatherTemp.Text = "°C";
+            // 
+            // panChat
+            // 
+            panChat.BorderStyle = BorderStyle.FixedSingle;
+            panChat.Controls.Add(btnLeaveChat);
+            panChat.Controls.Add(btnJoinChat);
+            panChat.Controls.Add(btnSetName);
+            panChat.Controls.Add(textBoxSetName);
+            panChat.Controls.Add(textBoxChatContent);
+            panChat.Controls.Add(textBoxChatInput);
+            panChat.Location = new Point(12, 9);
+            panChat.Name = "panChat";
+            panChat.Size = new Size(500, 218);
+            panChat.TabIndex = 22;
+            // 
+            // btnJoinChat
+            // 
+            btnJoinChat.Location = new Point(412, 82);
+            btnJoinChat.Name = "btnJoinChat";
+            btnJoinChat.Size = new Size(75, 23);
+            btnJoinChat.TabIndex = 4;
+            btnJoinChat.Text = "Join Chat";
+            btnJoinChat.UseVisualStyleBackColor = true;
+            // 
+            // btnSetName
+            // 
+            btnSetName.Location = new Point(412, 46);
+            btnSetName.Name = "btnSetName";
+            btnSetName.Size = new Size(75, 23);
+            btnSetName.TabIndex = 3;
+            btnSetName.Text = "Set Name";
+            btnSetName.UseVisualStyleBackColor = true;
+            // 
+            // textBoxSetName
+            // 
+            textBoxSetName.Location = new Point(412, 17);
+            textBoxSetName.Name = "textBoxSetName";
+            textBoxSetName.Size = new Size(75, 23);
+            textBoxSetName.TabIndex = 2;
+            // 
+            // textBoxChatContent
+            // 
+            textBoxChatContent.Location = new Point(22, 16);
+            textBoxChatContent.Multiline = true;
+            textBoxChatContent.Name = "textBoxChatContent";
+            textBoxChatContent.ReadOnly = true;
+            textBoxChatContent.Size = new Size(380, 149);
+            textBoxChatContent.TabIndex = 1;
+            // 
+            // textBoxChatInput
+            // 
+            textBoxChatInput.Location = new Point(23, 183);
+            textBoxChatInput.Name = "textBoxChatInput";
+            textBoxChatInput.Size = new Size(379, 23);
+            textBoxChatInput.TabIndex = 0;
+            // 
+            // lblChat
+            // 
+            lblChat.AutoSize = true;
+            lblChat.Font = new Font("Digital-7", 14.2499981F, FontStyle.Regular, GraphicsUnit.Point);
+            lblChat.ForeColor = Color.LightSteelBlue;
+            lblChat.Location = new Point(467, 47);
+            lblChat.Name = "lblChat";
+            lblChat.Size = new Size(44, 20);
+            lblChat.TabIndex = 23;
+            lblChat.Text = "CHAT";
+            // 
+            // btnLeaveChat
+            // 
+            btnLeaveChat.Location = new Point(412, 113);
+            btnLeaveChat.Name = "btnLeaveChat";
+            btnLeaveChat.Size = new Size(75, 23);
+            btnLeaveChat.TabIndex = 5;
+            btnLeaveChat.Text = "Leave Chat";
+            btnLeaveChat.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -486,6 +570,7 @@
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(524, 241);
             ControlBox = false;
+            Controls.Add(panChat);
             Controls.Add(panWeather);
             Controls.Add(lblWeather);
             Controls.Add(lvlExit);
@@ -508,6 +593,7 @@
             Controls.Add(ClockButton);
             Controls.Add(TimeLabel);
             Controls.Add(lblWeatherTemp);
+            Controls.Add(lblChat);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
@@ -517,6 +603,8 @@
             MouseUp += FormMouseUpEvent;
             panWeather.ResumeLayout(false);
             panWeather.PerformLayout();
+            panChat.ResumeLayout(false);
+            panChat.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -558,5 +646,13 @@
         private Label lblWeatherFeelsLike;
         private Label lblWeatherHumidity;
         private Label lblWeatherMinMax;
+        private Panel panChat;
+        private TextBox textBoxChatInput;
+        private TextBox textBoxChatContent;
+        private TextBox textBoxSetName;
+        private Button btnJoinChat;
+        private Button btnSetName;
+        private Label lblChat;
+        private Button btnLeaveChat;
     }
 }
