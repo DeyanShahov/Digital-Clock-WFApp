@@ -391,7 +391,7 @@
             // btnWeatherLoad
             // 
             btnWeatherLoad.Font = new Font("Digital-7", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnWeatherLoad.Location = new Point(240, 16);
+            btnWeatherLoad.Location = new Point(240, 18);
             btnWeatherLoad.Name = "btnWeatherLoad";
             btnWeatherLoad.Size = new Size(75, 23);
             btnWeatherLoad.TabIndex = 6;
@@ -401,9 +401,10 @@
             // 
             // textBoxWeatherCity
             // 
-            textBoxWeatherCity.Location = new Point(70, 16);
+            textBoxWeatherCity.Font = new Font("Digital-7", 8.999999F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxWeatherCity.Location = new Point(74, 20);
             textBoxWeatherCity.Name = "textBoxWeatherCity";
-            textBoxWeatherCity.Size = new Size(145, 23);
+            textBoxWeatherCity.Size = new Size(145, 19);
             textBoxWeatherCity.TabIndex = 5;
             // 
             // lblWeatherCity

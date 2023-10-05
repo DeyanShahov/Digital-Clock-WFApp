@@ -34,6 +34,8 @@ namespace Digital_Clock_WFApp
             ramCounter = new PerformanceCounter("Memory", "% Committed Bytes In Use", true);
             cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total", true);
 
+            timerWeather.Start();
+
             SetTempOnScreen();
         }
 
@@ -257,27 +259,34 @@ namespace Digital_Clock_WFApp
 
         private void lvlExit_Click(object sender, EventArgs e) => Application.Exit();
 
-        private void lblWeather_Click(object sender, EventArgs e)
+        private async void lblWeather_Click(object sender, EventArgs e)
         {
             if (panWeather.Visible == false)
             {
                 panWeather.Visible = true;
-                GetWeatherInfo();
+                await GetWeatherInfo();
             }
             else panWeather.Visible = false;
         }
 
-        private Root GetWeatherInfo(string city = "Burgas")
+        private async Task<Root> GetWeatherInfo(string city = "Burgas")
         {
             string appiKey = "8e8172944760f0c68c1f84d53f3d3f40";
             string url = string.Format("https://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&appid={1}", city, appiKey);
 
-            using (WebClient client = new WebClient())
+            try
             {
-                var json = client.DownloadString(url);
-                Root weatherInfo = JsonConvert.DeserializeObject<Root>(json);
+                using (WebClient client = new WebClient())
+                {
+                    string json = await client.DownloadStringTaskAsync(url);
+                    Root weatherInfo = JsonConvert.DeserializeObject<Root>(json);
 
-                return weatherInfo;
+                    return weatherInfo;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
 
@@ -286,28 +295,36 @@ namespace Digital_Clock_WFApp
             SetTempOnScreen();
         }
 
-        private void SetTempOnScreen()
+        private async void SetTempOnScreen()
         {
-            var weatherInfo = GetWeatherInfo();
+            var weatherInfo = await GetWeatherInfo();
 
-            lblWeatherTemp.Text = Math.Round(weatherInfo.main.temp) + "°C";
+            if (weatherInfo != null) lblWeatherTemp.Text = Math.Round(weatherInfo.main.temp) + " °C";
+            else lblWeatherTemp.Text = "Error";
         }
 
-        private void btnWeatherLoad_Click(object sender, EventArgs e)
+        private async void btnWeatherLoad_Click(object sender, EventArgs e)
         {
             Root weatherInfo;
 
-            if (!string.IsNullOrEmpty(textBoxWeatherCity.Text)) weatherInfo = GetWeatherInfo(textBoxWeatherCity.Text);
-            else weatherInfo = GetWeatherInfo();
+            if (!string.IsNullOrEmpty(textBoxWeatherCity.Text)) weatherInfo = await GetWeatherInfo(textBoxWeatherCity.Text);
+            else weatherInfo = await GetWeatherInfo();
 
-            lblWeatherMain.Text = weatherInfo.weather.FirstOrDefault()?.main;
-            lblWeatherDescription.Text = weatherInfo.weather.FirstOrDefault()?.description;
-            lblWeatherFullTemp.Text = "Temp: " + Math.Round(weatherInfo.main.temp) + " °C";
-            lblWeatherFeelsLike.Text = "Feels like: " + Math.Round(weatherInfo.main.feels_like) + " °C";
-            lblWeatherHumidity.Text = "Humidity: " + weatherInfo.main.humidity + "%";
-            lblWeatherMinMax.Text = Math.Round(weatherInfo.main.temp_min) + " / " + Math.Round(weatherInfo.main.temp_max) + " °C";
-            lblWeatherWindSpeed.Text = "Wind Speed: " + weatherInfo.wind.speed;
-            lblWeatherPressure.Text = "Pressure: " + weatherInfo.main.pressure;
+            if (weatherInfo != null)
+            {
+                lblWeatherMain.Text = weatherInfo.weather.FirstOrDefault()?.main;
+                lblWeatherDescription.Text = weatherInfo.weather.FirstOrDefault()?.description;
+                lblWeatherFullTemp.Text = "Temp: " + Math.Round(weatherInfo.main.temp) + " °C";
+                lblWeatherFeelsLike.Text = "Feels like: " + Math.Round(weatherInfo.main.feels_like) + " °C";
+                lblWeatherHumidity.Text = "Humidity: " + weatherInfo.main.humidity + "%";
+                lblWeatherMinMax.Text = Math.Round(weatherInfo.main.temp_min) + " / " + Math.Round(weatherInfo.main.temp_max) + " °C";
+                lblWeatherWindSpeed.Text = "Wind Speed: " + weatherInfo.wind.speed;
+                lblWeatherPressure.Text = "Pressure: " + weatherInfo.main.pressure;
+            }
+            else
+            {
+                textBoxWeatherCity.Text = "Error on loading";
+            }
         }
     }
 }
